@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from .models import Details_Demo
 
 # Create your views here.
 def all_demo(request):
-    return render(request,'demo/demo.html')
+    demos = Details_Demo.objects.all()
+    return render(request,'demo/demo.html',{'Demos':demos})
