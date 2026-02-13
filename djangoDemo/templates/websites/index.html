@@ -13,4 +13,13 @@ Login
 
     <button type="submit">Login</button>
 </form>
+
+{% for temp in demos  %}
+<div>
+    <img src='{{demo.image.url}}' alt=""/>
+    <h3>{{demo.name}}</h3>
+</div>
+{% endfor %}
+
+
 {% endblock %}

@@ -7,5 +7,14 @@
 </head>
 <body>
     <h2> Shwoing all demo details</h2>
+    {% for demo in demos %}
+<div>
+    <img src="{{ demo.image.url }}" alt="" width="200">
+    <h3>{{ demo.name }}</h3>
+    <p>{{demo.description}}</p>
+</div>
+{% empty %}
+<p>No demos available</p>
+{% endfor %}
 </body>
 </html>

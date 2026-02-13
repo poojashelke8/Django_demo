@@ -12,3 +12,4 @@ class Details_Demo(models.Model):
     image = models.ImageField(upload_to='demoImage/')
     date_added = models.DateTimeField(default=timezone.now)
     type=models.CharField(max_length=2,choices=DEMO_INFO)
+    description = models.TextField(default='')
