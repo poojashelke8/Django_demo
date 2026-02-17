@@ -13,3 +13,4 @@ class Details_Demo(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     type=models.CharField(max_length=2,choices=DEMO_INFO)
     description = models.TextField(default='')
+    is_published = models.BooleanField(default=False)

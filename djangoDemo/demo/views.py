@@ -4,6 +4,7 @@ from .models import Details_Demo
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework import status
 from .serializers import DetailSerializer
 from .serializers import Detail_Create_Serializer
@@ -12,6 +13,14 @@ from .serializers import Detail_Create_Serializer
 class DemoViewSet(viewsets.ModelViewSet):
     queryset = Details_Demo.objects.all()
     serializer_class = DetailSerializer
+
+    # CUSTOM ENDPOINTS INSIDE MODELVIEWSET:
+    @action(detail=True,methods=['post'])
+    def publish(self,request,pk=None):
+        demo = self.get_object()
+        demo.is_published = True
+        demo.save()
+        return Response({"status:Published"})
 
     # for different serializers for different use:
     # def get_serializer_class(self):
@@ -26,6 +35,7 @@ class DemoViewSet(viewsets.ModelViewSet):
     # return DemoDetailSerializer
 
 # Create your views here.
+# Seperated CRUD fUNCTIONS
 # @api_view(['GET'])
 # def all_demo(request):
 #     demos = Details_Demo.objects.all()
