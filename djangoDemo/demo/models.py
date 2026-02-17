@@ -14,3 +14,7 @@ class Details_Demo(models.Model):
     type=models.CharField(max_length=2,choices=DEMO_INFO)
     description = models.TextField(default='')
     is_published = models.BooleanField(default=False)
+
+class User(models.Model):
+    username = models.CharField(max_length=20)
+    password = models.CharField(max_length=20)
