@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Details_Demo,User
 
@@ -19,9 +20,9 @@ class RegisterUser(serializers.ModelSerializer):
         model = User
         fields = ['username','password']
 
-        def create(self,validated_data):
-            user = User.objects.create_user(
-                username = validated_data['username'],
-                password = validated_data['password']
-            )
-            return user
+    def create(self,validated_data):
+        user = User.objects.create_user(
+            username = validated_data['username'],
+            password = validated_data['password']
+        )
+        return user
