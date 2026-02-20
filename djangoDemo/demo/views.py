@@ -7,8 +7,9 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework import generics,status
 from .serializers import DetailSerializer,RegisterUser
-from .serializers import Detail_Create_Serializer
+from .serializers import Detail_Create_Serializer,LoginUser
 from rest_framework_simplejwt.tokens import RefreshToken
+
 
 
 class DemoViewSet(viewsets.ModelViewSet):
@@ -34,12 +35,20 @@ class RegisterUserView(generics.CreateAPIView):
 
         refresh = RefreshToken.for_user(user)
 
-
         return Response({
-            "user": serializer.data.username,
+            "user": serializer.data,
             "refresh": str(refresh),
             "access": str(refresh.access_token),
         }, status=status.HTTP_201_CREATED)
+    
+
+@api_view(['POST'])
+def LoginApi(request):
+    serializer = LoginUser(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    return Response(serializer.validated_data,status=status.HTTP_200_OK)
+    
+    
 
 
 
